@@ -14,7 +14,6 @@ const domMutationObserveScript = `
 
 const updateSizeWithMessage = (element, scalesPageToFit) =>
   `
-  var usingScale = ${scalesPageToFit} ? screen.width / window.innerWidth : 1;
   var scaling = false;
   var zoomedin = false;
   var lastHeight = 0;
@@ -39,7 +38,7 @@ const updateSizeWithMessage = (element, scalesPageToFit) =>
     clearTimeout(checkPostMessageTimeout);
     height = ${element}.offsetHeight || document.documentElement.offsetHeight;
     width = ${element}.offsetWidth || document.documentElement.offsetWidth;
-
+    var usingScale = ${scalesPageToFit} ? screen.width / window.innerWidth : 1;
     window.ReactNativeWebView.postMessage(JSON.stringify({ width: Math.min(width, screen.width), height: height * usingScale }));
 
     // Make additional height checks (required to fix issues wit twitter embeds)
